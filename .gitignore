@@ -1,0 +1,11 @@
+# Dataset blobs — distributed via GitHub Releases, not committed to git
+data/
+*.npz
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
