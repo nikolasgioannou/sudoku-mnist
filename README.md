@@ -2,9 +2,7 @@
 
 A drop-in, MNIST-style dataset of **34,386** digit images cropped from real photographs of Sudoku boards — **100×100** grayscale, ten classes (`0`–`9`, where `0` is an empty cell).
 
-Where MNIST is handwritten digits on a clean background, Sudoku MNIST is digits **in the wild**: printed in different fonts and weights, lit unevenly, sitting inside grid lines, with shadows and paper texture. That makes it a small but surprisingly real-world classification problem — and a one-line drop-in anywhere you'd use MNIST.
-
-![Example images — ten random samples per class](assets/examples.png)
+<img src="assets/examples.png" alt="Example images — ten random samples per class" width="480">
 
 *Ten random samples from each class. Row `0` is empty cells; rows `1`–`9` are the printed digits.*
 
@@ -18,7 +16,11 @@ To train the digit recognizer, I photographed every Sudoku board myself, cropped
 
 ## Quick start
 
+Clone the repo and work from inside it — the loader (`sudoku_mnist.py`) lives there, and your code should run from that folder:
+
 ```bash
+git clone https://github.com/nikolasgioannou/sudoku-mnist.git
+cd sudoku-mnist
 pip install -r requirements.txt
 ```
 
@@ -48,7 +50,7 @@ Inside the `.npz` are four arrays — `x_train`, `y_train`, `x_test`, `y_test` �
 
 ## Dataset details
 
-| | |
+| Property | Value |
 |---|---|
 | Images | 34,386 |
 | Resolution | 100 × 100, grayscale (8-bit) |
@@ -65,19 +67,6 @@ Per-class counts (train / test):
 | test | 2350 | 311 | 303 | 305 | 307 | 306 | 314 | 320 | 322 | 319 |
 
 > **Class imbalance:** `0` (empty cells) is by far the majority class — a Sudoku board is mostly empty. Weight your loss or resample accordingly.
-
-## How it was made (pipeline)
-
-1. **Photograph** every Sudoku board.
-2. **Crop** each board into its 81 cells, keeping only the cells used.
-3. **Hand-classify** each cell image into `0`–`9`.
-4. **Square-crop + resize** every image to 100×100 (center crop to a square, then downscale — no stretching).
-5. **Grayscale + pack** all images into `sudoku_mnist.npz` with a deterministic, stratified train/test split (fixed seed `42`, so the split is reproducible).
-
-## Files
-
-- `sudoku_mnist.py` — one-line loader (`load_data()`).
-- `requirements.txt` — `numpy`.
 
 ## License
 
