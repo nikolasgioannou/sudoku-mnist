@@ -72,23 +72,12 @@ Per-class counts (train / test):
 2. **Crop** each board into its 81 cells, keeping only the cells used.
 3. **Hand-classify** each cell image into `0`–`9`.
 4. **Square-crop + resize** every image to 100×100 (center crop to a square, then downscale — no stretching).
-5. **Grayscale + pack** all images into `sudoku_mnist.npz` with a deterministic, stratified train/test split.
-
-Steps 4–5 are reproducible with `build_npz.py`:
-
-```bash
-pip install -r requirements.txt
-python build_npz.py        # reads data/<digit>/*.jpg -> writes sudoku_mnist.npz
-```
-
-The split uses a fixed seed (42), so the output is byte-for-byte reproducible.
+5. **Grayscale + pack** all images into `sudoku_mnist.npz` with a deterministic, stratified train/test split (fixed seed `42`, so the split is reproducible).
 
 ## Files
 
 - `sudoku_mnist.py` — one-line loader (`load_data()`).
-- `build_npz.py` — rebuilds `sudoku_mnist.npz` from the source image folders.
-- `requirements.txt` — `numpy`, `Pillow`.
-- `sudoku_mnist.npz.sha256` — checksum for integrity verification.
+- `requirements.txt` — `numpy`.
 
 ## License
 
