@@ -34,20 +34,6 @@ from sudoku_mnist import load_data
 
 That's it. The shape and dtype mirror `keras.datasets.mnist`, so existing MNIST code mostly just works (note the larger 100×100 images).
 
-## How it works
-
-The dataset ships as a single compressed file, `sudoku_mnist.npz` (~222 MB), hosted on the [GitHub Release](https://github.com/nikolasgioannou/sudoku-mnist/releases) — **not** committed to git. There's no need to download 34k individual image files.
-
-On the first call, `load_data()`:
-
-1. downloads `sudoku_mnist.npz` from the Release,
-2. verifies its **SHA-256** against the expected checksum (corrupt or partial downloads fail loudly),
-3. caches it under `~/.cache/sudoku_mnist/`.
-
-Every later call loads straight from that cache. If a copy of `sudoku_mnist.npz` already sits next to your code, it's used directly and nothing is downloaded.
-
-Inside the `.npz` are four arrays — `x_train`, `y_train`, `x_test`, `y_test` — the same keys Keras's MNIST loader produces.
-
 ## Dataset details
 
 | Property | Value |
